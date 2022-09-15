@@ -1,0 +1,17 @@
+{
+  "extends": "tsconfig/nestjs.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@/auth/*": ["auth/*"],
+      "@/config/*": ["config/*"],
+      "@/database/*": ["database/*"],
+      "@/graphql/*": ["graphql/*"],
+      "@/helpers/*": ["helpers/*"],
+      "@/user/*": ["user/*"],
+      "@/transformers/*": ["transformers/*"],
+    }
+  },
+  "include": ["src"]
+}

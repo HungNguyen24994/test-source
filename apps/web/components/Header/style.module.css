@@ -1,0 +1,12 @@
+.Header-Container {
+  @apply
+    mb-4
+    p-2
+    flex justify-between;
+  height: 50px;
+}
+
+.Header-PageTitle {
+  @apply
+    text-3xl;
+}

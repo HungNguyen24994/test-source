@@ -1,0 +1,8 @@
+.App {
+  @apply relative min-h-screen pb-20 md:flex md:mb-0;
+}
+
+.App-Main {
+  @apply w-full px-2 md:px-0 md:ml-48;
+  /* z-index: 1; */
+}

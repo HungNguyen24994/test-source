@@ -1,0 +1,13 @@
+type User {
+  id: Int!
+  name: String!
+  username: String!
+  avatar: String
+}
+
+
+# Query
+type Query {
+  user(id: Int!): User!
+  currentUser: User!
+}
