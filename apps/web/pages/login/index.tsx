@@ -3,7 +3,6 @@ import { InputRule } from "@/utils/constants/common-const";
 import { RegisterInput } from "@/utils/types";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { Button, ButtonType } from "ui";
 import BasicInput from "ui/Input";
@@ -24,23 +23,23 @@ const LoginPage = () => {
   const route = useRouter();
 
   const onSubmitRegister = useCallback(async () => {
-    if (!name || !username) return;
-    setLoading(true);
+    // if (!name || !username) return;
+    // setLoading(true);
 
-    try {
-      const input: RegisterInput = {
-        name,
-        username,
-      };
-      const result = await newbieRegister(input);
-      const { data, errors } = result;
-      if (data?.register && !errors) {
-        setLoading(false);
-        route.push("/");
-      }
-    } catch (error: any) {
-      setLoading(false);
-    }
+    // try {
+    //   const input: RegisterInput = {
+    //     name,
+    //     username,
+    //   };
+    //   const result = await newbieRegister(input);
+    //   const { data, errors } = result;
+    //   if (data?.register && !errors) {
+    //     setLoading(false);
+    //     route.push("/");
+    //   }
+    // } catch (error: any) {
+    //   setLoading(false);
+    // }
   }, [name, username]);
 
   // prevent submit when enter

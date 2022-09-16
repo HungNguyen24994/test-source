@@ -1,73 +1,85 @@
-# Turborepo starter
+# Test app
 
-This is an official Yarn v1 starter turborepo.
+## Technical stack
 
-## What's inside?
+- Backend: NodeJS (NestJS) + PostgresQL + Apollo GraphQL Server
+- Frontend: React (NextJS) + TailwindCSS + Redux + Apollo GraphQL Client
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager. It includes the following packages/apps:
+## Directory structure
 
-### Apps and Packages
+- **apps** _workspaces_
+  - **server**
+  - **web**
+- **packages** _shared configs, libraries, ..._
+  - **eslint-config-custom**
+  - **tsconfig**
+- **package.json**
+- **yarn.lock**
+- **turbo.json**
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+## How to run app
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- Run app:
 
-### Utilities
-
-This turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run build
+```bash
+docker compose up -d
 ```
 
-### Develop
+- View log:
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run dev
+```bash
+docker compose logs -f web
 ```
 
-### Remote Caching
+- SSH to container
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+docker compose exec web sh
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Services
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+- Web: `http://localhost:3000`
+- API: `http://localhost:3001/graphql`
 
+## Development
+
+_If you are using docker, all command should be run inside app container, not on host machine_
+
+We are using [Turborepo](https://turborepo.org/) and [Yarn workspace](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
+
+### Add new packages
+
+- add new package for `server` workspace:
+
+```bash
+yarn workspace server add package-name
 ```
-npx turbo link
+
+- remove package for `server` workspace:
+
+```bash
+yarn workspace server remove package-name
 ```
 
-## Useful Links
+### Database
 
-Learn more about the power of Turborepo:
+_We are using [MikroORM](https://mikro-orm.io/) and their migrations/seeders tool:_
 
-- [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
-- [Caching](https://turborepo.org/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
-- [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
-- [Configuration Options](https://turborepo.org/docs/reference/configuration)
-- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
+- generate new migrations file base on new changes from `apps/server/database/entities`:
+
+```bash
+yarn workspace server migration:create
+```
+
+- run migrations:
+
+```bash
+yarn workspace server migration:up
+```
+
+- rollback migrations:
+
+```bash
+yarn workspace server migration:down
+```

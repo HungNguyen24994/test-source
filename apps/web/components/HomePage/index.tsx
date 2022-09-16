@@ -1,8 +1,13 @@
 import useUser from "@/hooks/user";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useCallback } from "react";
 import { Button } from "ui";
 export default function HomePage() {
   const { dataUser } = useUser();
+  const route = useRouter()
+  const onGoToLogin = useCallback(() => {
+    route.push('/login')
+  },[])
 
   return (
     <>
@@ -11,7 +16,7 @@ export default function HomePage() {
         {dataUser?.currentUser ? (
           <p>{dataUser?.currentUser.name || "User name"}</p>
         ) : (
-          <Button>{"Go to Login page"}</Button>
+          <Button onClick={onGoToLogin}>{"Go to Login page"}</Button>
         )}
       </div>
     </>

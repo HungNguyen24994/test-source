@@ -7,7 +7,7 @@ import { RegisterInput } from "@/utils/types";
 
 export default function useAuth() {
   const authToken = Cookies.get("auth-token");
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { user } = useSelector(selectAuthState);
 
   const newbieRegister = async (input: RegisterInput) => {

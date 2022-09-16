@@ -26,4 +26,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(MyApp)
